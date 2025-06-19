@@ -1,0 +1,12 @@
+<% if quests.empty? %>
+  <div class="text-center text-gray-500 p-6">
+    <p class="text-s font-semibold">No quests found.</p>
+    <p class="text-sm font-light italic">Add a new quest to get started!</p>
+  </div>
+<% else %>
+  <div class="space-y-4">
+    <% quests.each do |quest| %>
+      <%= render quest %>
+    <% end %>
+  </div>
+<% end %>

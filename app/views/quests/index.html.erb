@@ -29,41 +29,13 @@
 
 
   <div class="md:mx-60 mx-10 min-h-[230px] md:min-h-[250px] p-4 bg-gray-50 rounded-2xl shadow-md">
-    <%= form_with(model: @new_quest, url: quests_path, class: "relative mb-8") do |form| %>
-      <%= form.text_field :name, 
-                          placeholder: "Add new quest..",
-                          class: "w-full pl-4 pr-12 py-3 border border-gray-300 rounded-md text-lg focus:outline-none focus:border-gray-500 focus:ring-0",
-                          required: true %>
-      <button type="submit" class="absolute right-0 top-0 h-full w-12 flex items-center justify-center bg-[#4cad99] text-white rounded-r-md text-xl hover:bg-teal-500 transition duration-200">
-        <i class="fas fa-plus" data-testid = "add-quest-button"></i>
-      </button>
+    <%= turbo_frame_tag "new_quest" do %>
+      <%= render partial: "form", locals: { quest: @new_quest } %>
     <% end %>
 
-    <% if @new_quest.errors.any? %>
-      <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 text-sm">
-        <p><strong><%= pluralize(@new_quest.errors.count, "error") %> prohibited this task from being saved:</strong></p>
-        <ul>
-          <% @new_quest.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+    <%= turbo_frame_tag "quests" do %>
+      <%= render partial: "quests_list", locals: { quests: @quests } %>
     <% end %>
-
-    <% if @quests.empty? %>
-      <div class="text-center text-gray-500 p-6">
-        <p class="text-s font-semibold">No quests found.</p>
-        <p class="text-sm font-light italic">Add a new quest to get started!</p>
-      </div>
-    <% else %>
-      <div id="quests" class="space-y-4">
-       <% @quest_to_display = @quests.order(:created_at).reverse %>
-        <% @quest_to_display.each do |quest| %>
-         <%= render quest %>
-      <% end %>
-      </div>
-    <% end %>
-   
   </div>
 
   <footer class="bg-[#4cad99] text-white text-center py-4 mt-8 w-full bottom-0 left-0 z-50 static">
