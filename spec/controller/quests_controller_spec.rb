@@ -6,10 +6,14 @@ RSpec.describe QuestsController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    { name: "", status: "invalid" }
+    { name: nil, status: nil }
   }
 
   describe "GET #index" do
+    before do
+        Quest.destroy_all
+    end
+
     it "returns a successful response" do
       Quest.create! valid_attributes
       get :index
