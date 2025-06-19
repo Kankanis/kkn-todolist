@@ -3,7 +3,7 @@ class QuestsController < ApplicationController
 
   # GET /quests or /quests.json
   def index
-    @quests = Quest.all.order(created_at: :asc)
+    @quests = Quest.all.order(created_at: :desc)
     @new_quest = Quest.new
   end
 
