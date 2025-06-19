@@ -4,12 +4,12 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV["DB_HOST"] %>
-  username: <%= ENV["DB_USERNAME"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
-  port: <%= ENV["DB_PORT"] %>
-  database: <%= ENV["DB_NAME"] %>_development
-  # url: <%=ENV["DATABASE_URL"]%>
+  # host: <%= ENV["DB_HOST"] %>
+  # username: <%= ENV["DB_USERNAME"] %>
+  # password: <%= ENV["DB_PASSWORD"] %>
+  # port: <%= ENV["DB_PORT"] %>
+  # database: <%= ENV["DB_NAME"] %>_development
+  url: <%=ENV["DATABASE_URL"]%>
 
 test:
   <<: *default
