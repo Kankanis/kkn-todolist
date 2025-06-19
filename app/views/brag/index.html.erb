@@ -1,4 +1,69 @@
-<div>
-  <h1 class="font-bold text-4xl">Brag#index</h1>
-  <p>Find me in app/views/brag/index.html.erb</p>
+<div class="mx-auto font-sans text-gray-600">
+<div class="bg-[#4cad99] text-white p-4 flex items-center">
+  <%= link_to root_path, class: "text-2xl mr-4", data: { testid: "back-to-quests-button", turbo: false } do %>
+    <i class="fas fa-arrow-left text-yellow-500"></i> 
+  <% end %>
+  <span class="flex-grow text-center text-3xl font-bold">My Brag Document</span> 
+</div>
+
+<div class="bg- pb-5 mb-5">
+  <div class="relative w-full h-[200px] overflow-hidden">
+  <%= image_tag "macbook.JPG", alt: "Banner Image", class: "w-full h-full object-cover" %>
+</div>
+<div class="bg-gray-50 rounded-2xl p-4 shadow- mt-8 md:mx-60 mx-10">
+
+      <h1 class="text-3xl font-bold italic text-center p-5 pt-0 text-gray-600">Goals for 2025</h1>
+      <div class="flex flex-row pl-5 w-full h-0.5 rounded-2xl bg-[#4cad99] "></div> 
+
+        <div class="space-y-4">
+        <div class="rounded-xl p-5">
+            <ul class="space-y-3">
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>สอบ Academy ผ่าน</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>เขียน Logic ของโค้ดได้ด้วยตัวเอง</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>ทำ TDD จนคล่อง</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>เขียน Test จนเซียน</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span class="">มีเรื่องที่ถนัดจนคนอื่นขอความช่วยเหลือได้ (แต่ยังไม่รู้ว่าเรื่องอะไร)</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>มี business context เพื่อเข้าใจลูกค้า</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>เป็นส่วนหนึ่งที่ช่วยทีมได้</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>มีเวลาพอที่จะลงเรียนเพิ่มทักษะ แต่ต้องผ่านเงื่อนไขทำงานด้วยตัวเองให้ได้ก่อน</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>อ่านหนังสือสักเล่ม</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>วิ่งแบบไม่หยุดได้ใน 30 นาที</span>
+            </li>
+            <li class="flex items-start">
+                <span class="inline-block min-w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></span>
+                <span>เวทเทรนนิ่งหุ่นกระชับ</span>
+            </li>
+            </ul>
+          </div>
+        </div>
+    </div>
 </div>
