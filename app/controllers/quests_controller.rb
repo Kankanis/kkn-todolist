@@ -23,14 +23,26 @@ class QuestsController < ApplicationController
   # POST /quests or /quests.json
   def create
     @quest = Quest.new(quest_params)
+    @new_quest = Quest.new
+    @quests = Quest.all.order(created_at: :desc)
 
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to quests_path, notice: "Quest was successfully created." }
-        format.json { render :show, status: :created, location: @quest }
+        format.turbo_stream {
+          render turbo_stream: [
+            turbo_stream.update("quests", partial: "quests/quests_list", locals: { quests: @quests }),
+            turbo_stream.update("new_quest", partial: "form", locals: { quest: @new_quest })
+          ]
+        }
+        format.html { redirect_to quests_path }
       else
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.update("new_quest",
+            partial: "form",
+            locals: { quest: @quest }
+          )
+        }
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,11 +65,16 @@ class QuestsController < ApplicationController
   # DELETE /quests/1 or /quests/1.json
   def destroy
     @quest.destroy!
+    @quests = Quest.all.order(created_at: :desc)
 
     respond_to do |format|
-      format.html { redirect_to quests_path, status: :see_other, notice: "Quest was successfully destroyed." }
-      format.json { head :no_content }
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@quest) }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.update("quests",
+          partial: "quests/quests_list",
+          locals: { quests: @quests }
+        )
+      }
+      format.html { redirect_to quests_path }
     end
   end
 
