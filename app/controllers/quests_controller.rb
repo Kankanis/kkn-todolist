@@ -3,7 +3,8 @@ class QuestsController < ApplicationController
 
   # GET /quests or /quests.json
   def index
-    @quests = Quest.all
+    @quests = Quest.all.order(created_at: :desc)
+    @new_quest = Quest.new
   end
 
   # GET /quests/1 or /quests/1.json
@@ -25,7 +26,7 @@ class QuestsController < ApplicationController
 
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to @quest, notice: "Quest was successfully created." }
+        format.html { redirect_to quests_path, notice: "Quest was successfully created." }
         format.json { render :show, status: :created, location: @quest }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,9 +41,11 @@ class QuestsController < ApplicationController
       if @quest.update(quest_params)
         format.html { redirect_to @quest, notice: "Quest was successfully updated." }
         format.json { render :show, status: :ok, location: @quest }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@quest, partial: "quests/quest", locals: { quest: @quest }) }
       end
     end
   end
@@ -54,17 +57,18 @@ class QuestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to quests_path, status: :see_other, notice: "Quest was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@quest) }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quest
-      @quest = Quest.find(params.expect(:id))
+      @quest = Quest.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def quest_params
-      params.expect(quest: [ :name, :status ])
+      params.require(:quest).permit(:name, :status)
     end
 end
